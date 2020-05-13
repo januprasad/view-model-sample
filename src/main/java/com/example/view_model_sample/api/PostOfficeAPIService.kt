@@ -7,7 +7,7 @@ import retrofit2.Response
 
 internal class PostOfficeAPIService : ApiService() {
 
-    fun hitPostOfficeAPI(): MutableLiveData<PostOfficeResponse> {
+    fun hitPostOfficeAPI(): MutableLiveData<PostOfficeResponse>? {
 
         var postOfficeResponseMutableLiveData = MutableLiveData<PostOfficeResponse>()
 

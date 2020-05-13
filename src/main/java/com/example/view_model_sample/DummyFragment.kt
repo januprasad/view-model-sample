@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.view_model_sample.api.PostOfficeDTO
 import com.example.view_model_sample.api.PostOfficeResponse
 import kotlinx.android.synthetic.main.fragment_dummy.button_pincode
 import kotlinx.android.synthetic.main.fragment_dummy.result
@@ -29,11 +28,16 @@ class DummyFragment : Fragment() {
     return inflater.inflate(R.layout.fragment_dummy, container, false)
   }
 
+  private var viewModel: DummyViewModel? = null
   override fun onViewCreated(
     view: View,
     savedInstanceState: Bundle?
   ) {
     super.onViewCreated(view, savedInstanceState)
+
+    viewModel = activity?.run {
+      ViewModelProviders.of(this)[DummyViewModel::class.java]
+    } ?: throw Exception("Invalid Activity")
 
     button_pincode.setOnClickListener {
       apiCall()
@@ -42,37 +46,22 @@ class DummyFragment : Fragment() {
 
   private fun apiCall() {
 
-    var viewModel = activity?.run {
-      ViewModelProviders.of(this)[DummyViewModel::class.java]
-    } ?: throw Exception("Invalid Activity")
-
-    postOfficeResponseObserver(viewModel.postOfficeAPI())
+    viewModel?.postOfficeAPI()?.let { postOfficeResponseObserver(it) }
 
   }
 
   private fun postOfficeResponseObserver(postOfficeAPI: MutableLiveData<PostOfficeResponse>) {
-    activity?.let {
-      postOfficeAPI.observe(it, Observer { response ->
+      postOfficeAPI.observe(requireActivity(), Observer { response ->
         if (response != null) {
         Log.w("Response",response[0].Message)
          buildTextViewString(response)
         }
       })
-    }
   }
 
   private fun buildTextViewString(response: PostOfficeResponse) {
     result.text = """${response[0].PostOffice[0].Name}${response[0].PostOffice[0].Pincode}"""
   }
-  /* private fun postOfficeResponseObserver(postOfficeAPI: MutableLiveData<PostOfficeDTO>) {
-    activity?.let {
-      postOfficeAPI.observe(it, Observer { response ->
-        if (response != null) {
-          Log.w("Response",response.Message)
-        }
-      })
-    }
-  }*/
 
   companion object {
     @JvmStatic fun newInstance() = DummyFragment()
