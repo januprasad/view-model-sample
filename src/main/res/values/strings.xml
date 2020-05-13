@@ -3,5 +3,4 @@
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello Dummy fragment</string>
   <string name="get_pincode_kochi">Get Pincode Kaloor</string>
-  <string name="saved_in_vm">Saved in VM</string>
 </resources>
