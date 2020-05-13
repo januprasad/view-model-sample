@@ -1,7 +1,7 @@
 package com.example.view_model_sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.view_model_sample.R.id
 
 class MainActivity : AppCompatActivity() {
@@ -9,8 +9,8 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-//    if(savedInstanceState==null)
-      loadDummyFragment()
+    if(savedInstanceState==null)
+       loadDummyFragment()
   }
 
   private fun loadDummyFragment() {

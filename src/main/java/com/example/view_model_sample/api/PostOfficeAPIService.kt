@@ -1,13 +1,13 @@
 package com.example.view_model_sample.api
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 internal class PostOfficeAPIService : ApiService() {
 
-    fun hitPostOfficeAPI(): MutableLiveData<PostOfficeResponse>? {
+    fun hitPostOfficeAPI(): MutableLiveData<PostOfficeResponse> {
 
         var postOfficeResponseMutableLiveData = MutableLiveData<PostOfficeResponse>()
 
